@@ -10,6 +10,9 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
       
-      - name: Run simply command
+      - name: Output to cache
         run: |
-          ls -la
+          mkdir cache
+          echo "hello cache" >> output.txt
+          ls cache
+      
