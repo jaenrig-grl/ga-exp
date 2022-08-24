@@ -1,0 +1,13 @@
+name: Cache usage example
+
+on:
+  push:
+
+jobs:
+  producer-job:
+    run-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        run: |
+          ls -la
