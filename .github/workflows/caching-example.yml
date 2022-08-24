@@ -4,7 +4,7 @@ on:
   push:
 
 jobs:
-  producer-job:
+  cache-producer-job:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -15,4 +15,18 @@ jobs:
           mkdir cache
           echo "hello cache" >> output.txt
           ls cache
-      
+
+      - name: Cache output
+        id: cache-output
+        uses: actions/cache@v3
+        with:
+          path: cache
+          key: ${{ runner.os }}-out-file
+  
+  cache-hit-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate Prime Numbers
+        if: steps.cache-outputs.outputs.cache-hit != 'true'
+        run: |
+          ls cache
