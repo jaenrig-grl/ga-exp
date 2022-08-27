@@ -1,32 +1,38 @@
-name: Cache usage example
+name: Artifact upload/download usage example
 
 on:
   push:
 
 jobs:
-  cache-producer-job:
+  artifact-producer-job:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
       
-      - name: Output to cache
+      - name: Artifact to upload
         run: |
-          mkdir cache
-          echo "hello cache" >> output.txt
-          ls cache
+          mkdir artifact
+          cd artifact
+          echo "hello artifact!" >> output.txt
+          ls artifact
 
-      - name: Cache output
-        id: cache-output
-        uses: actions/cache@v3
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v3
         with:
-          path: cache
-          key: ${{ runner.os }}-out-file
-  
-  cache-hit-job:
+          name: output-file
+          path: artifact
+
+  artifact-consumer-job:
     runs-on: ubuntu-latest
     steps:
-      - name: Generate Prime Numbers
-        if: steps.cache-outputs.outputs.cache-hit != 'true'
+      - name: Download a single artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: output-file
+      
+      - name: Use retrieved artifact
         run: |
-          ls cache
+          ls artifact
+          cd artifact
+          cat output.txt
