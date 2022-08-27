@@ -35,5 +35,5 @@ jobs:
       
       - name: Use retrieved artifact
         run: |
-          ls
+          ls artifact
           #cat output.txt
