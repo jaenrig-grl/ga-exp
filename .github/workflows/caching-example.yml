@@ -15,7 +15,7 @@ jobs:
           mkdir artifact
           cd artifact
           echo "hello artifact!" >> output.txt
-          ls artifact
+          ls
 
       - name: Archive production artifacts
         uses: actions/upload-artifact@v3
