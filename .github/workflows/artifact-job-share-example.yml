@@ -35,3 +35,4 @@ jobs:
       - name: Use retrieved artifact
         run: |
           ls
+          cat output.txt
