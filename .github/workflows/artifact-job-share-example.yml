@@ -31,8 +31,9 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: output-file
+          path: artifact
       
       - name: Use retrieved artifact
         run: |
           ls
-          cat output.txt
+          #cat output.txt
